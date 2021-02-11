@@ -28,4 +28,11 @@ public class BookingNotFoundAdvice extends ResponseEntityExceptionHandler {
     String invalidRequestParameter(TransactionSystemException te){
         return te.getOriginalException().getCause().getMessage();
     }
+
+    @ResponseBody
+    @ExceptionHandler(RoomNotFound.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    String roomIdNotFound(RoomNotFound rnf){
+        return rnf.getMessage();
+    }
 }

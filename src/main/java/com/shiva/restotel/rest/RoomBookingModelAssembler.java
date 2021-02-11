@@ -9,10 +9,10 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 
 @Component
-public class RoomBookingModelAssembler implements RepresentationModelAssembler<RoomBooking,EntityModel<RoomBooking>> {
+public class RoomBookingModelAssembler implements RepresentationModelAssembler<RoomBookingV1,EntityModel<RoomBookingV1>> {
 
     @Override
-    public EntityModel<RoomBooking> toModel(RoomBooking booking) {
+    public EntityModel<RoomBookingV1> toModel(RoomBookingV1 booking) {
         return EntityModel.of(booking,
                linkTo(methodOn(RoomController.class).getBookingDetails(booking.getId())).withSelfRel(),
                 linkTo(methodOn(RoomController.class).getAllBookings()).withRel("bookings"));

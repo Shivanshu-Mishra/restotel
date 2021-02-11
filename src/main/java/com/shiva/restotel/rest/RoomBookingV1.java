@@ -1,21 +1,26 @@
 package com.shiva.restotel.rest;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Objects;
-
+@ApiModel(description = "All details about the room booking.")
 @Entity
-public class RoomBooking {
+@JsonIgnoreProperties(value={"id"})
+public class RoomBookingV1 {
     private @Id @GeneratedValue Long id;
-    @NotNull @Size(min=2) private String customerName;
-    @NotNull  private String checkIn;
+    @NotNull @Size(min=2) @ApiModelProperty(notes="Customer name should have atleast 3 characters") private String customerName;
+    @NotNull  @ApiModelProperty(notes="CheckIn date should be specified during booking")private String checkIn;
     private String checkOut;
-    @NotNull private Long roomId;
+    @NotNull @ApiModelProperty(notes="Room should be allocated to customer during booking only")private Long roomId;
 
-    public RoomBooking(){}
+    public RoomBookingV1(){}
 
     @Override
     public String toString() {
@@ -28,7 +33,7 @@ public class RoomBooking {
                 '}';
     }
 
-    public RoomBooking(String customerName, String checkIn, Long roomId) {
+    public RoomBookingV1(String customerName, String checkIn, Long roomId) {
         this.customerName = customerName;
         this.checkIn = checkIn;
         this.roomId = roomId;
@@ -78,7 +83,7 @@ public class RoomBooking {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        RoomBooking that = (RoomBooking) o;
+        RoomBookingV1 that = (RoomBookingV1) o;
         return id.equals(that.id) && customerName.equals(that.customerName)  && roomId.equals(that.roomId);
     }
 

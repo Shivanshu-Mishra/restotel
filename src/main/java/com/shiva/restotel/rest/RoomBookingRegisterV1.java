@@ -2,5 +2,5 @@ package com.shiva.restotel.rest;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface Register extends JpaRepository<RoomBooking,Long> {
+public interface RoomBookingRegisterV1 extends JpaRepository<RoomBookingV1,Long> {
 }
